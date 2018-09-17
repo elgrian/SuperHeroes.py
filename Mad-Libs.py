@@ -10,7 +10,10 @@ medicine = input("What is a cure all medicine? :  ")
 crush = input("Who is a celebrity/person you know, who you have crush on? : ")
 adjective1 = input("Give me an adjective to describe a person? : ")
 favShow = input("What is your favorite TV Show/ Movie? : ")
-favFood = input("What is your favoite snack food? :  \n \n")
+favFood = input("What is your favorite snack food? : ")
+
+time.sleep(0.1)
+
 
 #Completed input Print
 print("Now that I have all the information I need, here is the story I have created for you! \n \n")
@@ -18,10 +21,7 @@ time.sleep(0.2)
 
 
 # Story
-madLibs = """{} was a beginner programmer who moved to {}. When they got there, they ended up getting a huge {} on their {}. Needless to say, it wasn't pleasant and they hurried
-quickly to the E.R. Like always, the E.R. was full and the wait would be hours. They took their care into their own hands and just decided to take some {}. The {} didn't work
-and they blacked out from the pain. When they came to, {} was standing over them. Their {} was too much to handle and {} quickly ran away in embarassment and hid in their
-apartment. {} eventually began watching {} to release some stress, while eating {}. They ended up choking on the {} and unfortunately met their demise. \n \n""".format(name, place, verb1, bodyPart,
+madLibs = """{} was a beginner programmer who moved to {}. When they got there, they ended up getting a huge {} on their {}. Needless to say, it wasn't pleasant and they hurried to the E.R. Like always, the E.R. was full and the wait would be hours. They took their care into their own hands and just decided to take some {}. The {} didn't work and they blacked out from the pain. When they came to, {} was standing over them. They were too {} so {} quickly ran away in embarassment and hid in their apartment. {} eventually began watching {} to relieve some stress, while eating {}. They ended up choking on the {} and unfortunately met their demise. \n \n""".format(name, place, verb1, bodyPart,
 medicine, medicine, crush, adjective1, name, name, favShow, favFood, favFood)
 
 # print each character with a delay, flush

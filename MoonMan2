@@ -1,0 +1,4 @@
+dogs = list[]
+dogs.append("German Shepherd")
+dogs.append("Poodle")
+print(dogs)
