@@ -1,3 +1,4 @@
+
 import random
 #----------------------------------** Hero Class **-----------------------------------------------------------
 class Hero:
@@ -297,34 +298,39 @@ def create_armor():
 
 
 
-if __name__ == "__main__":
-    battle_zone =  Arena(int(input("What is the size of your team?: ")))
-    running = True
-    battle_zone.build_team_one()
-    battle_zone.build_team_two()
-    while(running):
-        print(battle_zone.team_battle())
-        i = input("Would you like to play again? (yes/no): ")
-        if( i == "no" or "n"):
-            running = False
-        else:
-            battle_zone.team_one.revive_heroes()
-            print(battle_zone.team_one.heroes[0].health)
-            battle_zone.team_two.revive_heroes()
+# if __name__ == "__main__":
+#     battle_zone =  Arena(int(input("What is the size of your team?: ")))
+#     running = True
+#     battle_zone.build_team_one()
+#     battle_zone.build_team_two()
+#     while(running):
+#         print(battle_zone.team_battle())
+#         i = input("Would you like to play again? (yes/no): ")
+#         if( i == "no" or "n"):
+#             running = False
+#         else:
+#             battle_zone.team_one.revive_heroes()
+#             print(battle_zone.team_one.heroes[0].health)
+#             battle_zone.team_two.revive_heroes()
 #----------------------------------** TEST **-----------------------------------------------------------
 # If you run this file from the terminal, this block is executed
 
-if __name__ == "__main__":
-    battle_zone =  Arena(int(input("What is the size of your team?: ")))
+if __name__=="__main__":
+    battle_zone = Arena(int(input("How many heroes does your team have?: ")))
     running = True
     battle_zone.build_team_one()
     battle_zone.build_team_two()
     while(running):
         print(battle_zone.team_battle())
-        i = input("Would you like to play again? (yes/no): ")
-        if( i == "no" or "n"):
+        i = input("do you want to play again(yes/no): ")
+        if(i == "no"):
             running = False
         else:
-            battle_zone.team_one.revive_heroes()
-            print(battle_zone.team_one.heroes[0].health)
-            battle_zone.team_two.revive_heroes()
+            battle_zone = Arena(int(input("How many heroes does your team have?: ")))
+            running = True
+            battle_zone.build_team_one()
+            battle_zone.build_team_two()
+            
+            # battle_zone.team_one.revive_heroes()
+            # print(battle_zone.team_one.heroes[0].health)
+            # battle_zone.team_two.revive_heroes()
