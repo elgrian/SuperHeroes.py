@@ -12,11 +12,11 @@ class Hero:
         self.kills = 0
 
 
-    """ 1. This method should run the defend method on each piece of armor and calculate the total defense.
-    2. If the hero's health is 0, the hero is out of play and should return 0 defense points."""
+    """ 1. This method should run the defend method on each piece of armor and calculate the total defence.
+    2. If the hero's health is 0, the hero is out of play and should return 0 defence points."""
     def defend(self):
-        defence = 0
-        if (self.health > 0): ##Come back to this and see if a while loops will work
+        defence = 0 # Don't hate on my defence. I PLAY RUNESCAPE
+        if self.health > 0: ##Come back to this and see if a while loops will work
             for item in self.armors:
                 defence += item.defend()
         return defence
@@ -26,7 +26,7 @@ class Hero:
     2. If the hero dies update number of deaths."""
     def take_damage(self, damage_amt):
         self.health -= damage_amt
-        if(self.health <= 0):
+        if self.health <= 0:
             self.deaths += 1
             return 1
         return 0
@@ -82,15 +82,15 @@ class Weapon(Ability):
 
 #----------------------------------** ARMOR CLASS **-----------------------------------------------------------
 class Armor:
-    """ 1. Instantiate name and defense strength."""
-    def __init__(self, name, defense):
+    """ 1. Instantiate name and defence strength."""
+    def __init__(self, name, defence):
         self.name = name
-        self.defense = defense
+        self.defence = defence
 
 
     """ 1. Return a random value between 0 and the initialized defend strength."""
     def defend(self):
-        return random.randint(0, self.defense)
+        return random.randint(0, self.defence)
 
 
 #----------------------------------** TEAM CLASS **-----------------------------------------------------------
@@ -148,8 +148,8 @@ class Team:
             hero.add_kill(kills)
 
 
-    """ 1. This method should calculate our team's total defense.
-    2. Any damage in excess of our team's total defense should be evenly distributed amongst all heroes with the deal_damage() method.
+    """ 1. This method should calculate our team's total defence.
+    2. Any damage in excess of our team's total defence should be evenly distributed amongst all heroes with the deal_damage() method.
     3. Return number of heroes killed in attack."""
     def defend(self, damage_amt):
         defence = 0
@@ -159,6 +159,7 @@ class Team:
             return self.deal_damage(damage_amt - defence)
         return 0
 
+
     """ 1. Divide the total damage amongst all heroes.
     2. Return the number of heros that died in attack."""
     def deal_damage(self, damage):
@@ -167,22 +168,30 @@ class Team:
             deaths += hero.take_damage(damage / len(self.heroes))
         return deaths
 
+
     """ 1. This method should reset all heroes health to their original starting value."""
     def revive_heroes(self, health=100):
         for hero in self.heroes:
             hero.health = hero.start_health
 
-        """ 1. This method should print the ratio of kills/deaths for each member of the team to the screen.
-        2. This data must be output to the terminal."""
+
+    """ 1. This method should print the ratio of kills/deaths for each member of the team to the screen.
+    2. This data must be output to the terminal."""
     def stats(self):
-        print(self.name)
-        for hero in self.heroes:
-            hero.display()
+        for kill in self.heroes:
+            print(kill.name + "Kills: " + str(kill.kills) + " Deaths:" + str(kill.deaths))
+        
+        
+        # print(self.name)
+        # for hero in self.heroes:
+        #     print(hero)
 
 
     """1. This method should update each hero when there is a team kill."""
     def update_kills(self):
-        return self.team_kills
+        for kill in self.heroes:
+            kill.kills += 1
+        # return self.team_kills
 
 #----------------------------------** ARENA CLASS **-----------------------------------------------------------
 class Arena:
@@ -227,15 +236,98 @@ class Arena:
         self.team_one.stats()
         self.team_two.stats()
 
+
+################################################################################
+
+def create_hero():
+    hero =  Hero(input("What is your heroes name: "))
+    print("What abilities does your hero have: ")
+    i = None
+    while(i != "stop".lower()):
+        hero.add_ability(create_ability())
+        i = input("Do you want to add more? Press Enter to add more or type 'stop' to finish adding : ")
+
+    print("What kind of weapons does your hero have?: ")
+    i = None
+    while( i != "stop".lower()):
+        hero.add_ability(create_weapon())
+        i = input("Do you want to add more? Press Enter to add more or type 'stop' to finish adding : ")
+
+    print("What kind of armor does your hero have?: ")
+    i = None
+    while(i != "stop".lower()):
+        hero.add_armor(create_armor())
+        i = input("Do you want to add more? Press Enter to add more or type 'stop' to finish adding : ")
+    print("Your hero is now complete ")
+    return hero
+
+# 
+# def create_hero():
+#     hero =  Hero(input("What is the name of your hero?: "))
+#     # print("What is one of their abilities?: ")
+#     i = None
+#     while(i != "stop".lower()):
+#         hero.add_ability(create_ability())
+#         i = input("Do you want to add more? Press Enter to add more or type 'stop' to finish adding : ")
+# 
+#     i = None
+#     while(i != "stop".lower()):
+#         hero.add_ability(create_weapon())
+#         i = input("Do you want to add more? Press Enter to add more or type 'stop' to finish adding : ")
+# 
+#     print("What kind of armor does your hero have?: ")
+#     i = None
+#     while(i != "stop".lower()):
+#         hero.add_armor(create_armor())
+#         i = input("Do you want to add more? Press Enter to add more or type 'stop' to finish adding : ")
+#     print("Hero complete")
+#     return hero
+
+
+def create_ability():
+    ability =  Ability(input("What is the abilities name?: "), int(input("What is its strength level?: ")))
+    return ability
+
+
+def create_weapon():
+    weapon =  Weapon(input("What is the name of the weapon?: "), int(input("What is its strength level?: ")))
+    return weapon
+
+
+def create_armor():
+    armor =  Armor(input("What is the name of the armor?: "), int(input("What is its strength level?: ")))
+    return armor
+
+
+
+if __name__ == "__main__":
+    battle_zone =  Arena(int(input("What is the size of your team?: ")))
+    running = True
+    battle_zone.build_team_one()
+    battle_zone.build_team_two()
+    while(running):
+        print(battle_zone.team_battle())
+        i = input("Would you like to play again? (yes/no): ")
+        if( i == "no" or "n"):
+            running = False
+        else:
+            battle_zone.team_one.revive_heroes()
+            print(battle_zone.team_one.heroes[0].health)
+            battle_zone.team_two.revive_heroes()
 #----------------------------------** TEST **-----------------------------------------------------------
 # If you run this file from the terminal, this block is executed
 
 if __name__ == "__main__":
-    hero = Hero("Super Man")
-    print(hero.attack())
-    ability = Ability("Laser Eyes", 600)
-    hero.add_ability(ability)
-    print(hero.attack())
-    new_ability = Ability("Super Strength", 1000)
-    hero.add_ability(new_ability)
-    print(hero.attack())
+    battle_zone =  Arena(int(input("What is the size of your team?: ")))
+    running = True
+    battle_zone.build_team_one()
+    battle_zone.build_team_two()
+    while(running):
+        print(battle_zone.team_battle())
+        i = input("Would you like to play again? (yes/no): ")
+        if( i == "no" or "n"):
+            running = False
+        else:
+            battle_zone.team_one.revive_heroes()
+            print(battle_zone.team_one.heroes[0].health)
+            battle_zone.team_two.revive_heroes()
