@@ -170,7 +170,7 @@ class Team:
 
 
     """ 1. This method should reset all heroes health to their original starting value."""
-    def revive_heroes(self, health=100):
+    def revive_heroes(self, health = 100):
         for hero in self.heroes:
             hero.health = hero.start_health
 
@@ -241,19 +241,16 @@ class Arena:
 
 def create_hero():
     hero =  Hero(input("What is your heroes name: "))
-    print("What abilities does your hero have: ")
     i = None
     while(i != "stop".lower()):
         hero.add_ability(create_ability())
         i = input("Do you want to add more? Press Enter to add more or type 'stop' to finish adding : ")
 
-    print("What kind of weapons does your hero have?: ")
     i = None
     while( i != "stop".lower()):
         hero.add_ability(create_weapon())
         i = input("Do you want to add more? Press Enter to add more or type 'stop' to finish adding : ")
 
-    print("What kind of armor does your hero have?: ")
     i = None
     while(i != "stop".lower()):
         hero.add_armor(create_armor())
